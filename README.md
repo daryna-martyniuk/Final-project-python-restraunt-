@@ -7,9 +7,9 @@ Basic logic:
 
 
 Essences and methods:
-DishCategory (get_all, get_by_id, get_by_name, create, update, delete)
-Dish (get_all, get_by_id, get_by_name, get_by_category_id, get_dishes_on_promotion, get_most_popular_dish, sort_dishes_by_price, create, update, delete)
-Promotion (get_all, get_by_id, get_active_promotion, create, update, delete)
-Order (get_all, get_by_id, get_active_orders, get_total_price, get_orders_by_period, create, update, complete_order, delete)
-OrderItem (get_all, get_by_id, get_by_order_id, create, update, delete)
-CafeTable (get_all, get_by_id, get_by_number, get_tables_by_occupancy, is_occupied, create, update, delete)
+DishCategory (get_all, get_by_id, get_by_name, create, update, delete).
+Dish (get_all, get_by_id, get_by_name, get_by_category_id, get_dishes_on_promotion, get_most_popular_dish, sort_dishes_by_price, create, update, delete).
+Promotion (get_all, get_by_id, get_active_promotion, create, update, delete).
+Order (get_all, get_by_id, get_active_orders, get_total_price, get_orders_by_period, create, update, complete_order, delete).
+OrderItem (get_all, get_by_id, get_by_order_id, create, update, delete).
+CafeTable (get_all, get_by_id, get_by_number, get_tables_by_occupancy, is_occupied, create, update, delete).
