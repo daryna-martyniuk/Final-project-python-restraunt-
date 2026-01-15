@@ -41,7 +41,7 @@ class OrderRepo:
             )
             .options(joinedload(Order.items))
         )
-        result = self.db.execute(stmt).unique()
+        result = self.db.execute(stmt)
         return result.unique().scalars().all()
 
     def create(self, data: OrderCreate) -> Order:

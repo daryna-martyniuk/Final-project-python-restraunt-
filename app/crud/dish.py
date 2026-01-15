@@ -87,5 +87,5 @@ class DishRepo:
     def has_order_items(self, dish_id: int) -> bool:
         return self.db.query(OrderItem).filter(OrderItem.dish_id == dish_id).first() is not None
 
-    def delet
+
 DishRepoDep = Annotated[DishRepo, Depends(DishRepo)]

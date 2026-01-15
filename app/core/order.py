@@ -83,21 +83,25 @@ class OrderService:
         return OrderResponse.model_validate(order)
 
     def update(self, order_id: int, order_update: OrderUpdate) -> OrderResponse:
-        order = self.order_repo.update(order_id, order_update)
-        if not order:
+        # 1. Спочатку дістаємо поточне замовлення
+        current_order = self.order_repo.get_by_id(order_id)
+        if not current_order:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Order not found")
-        table = self.table_repo.get_by_id(order_update.table_id)
-        if not table:
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail=f"Table id {order_update.table_id} not found"
-            )
-        if self.table_repo.is_table_occupied(table.id):
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail=f"Table {table.id} already has an active order."
-            )
-        return OrderResponse.model_validate(order)
+
+        if order_update.table_id != current_order.table_id:
+            table = self.table_repo.get_by_id(order_update.table_id)
+            if not table:
+                raise HTTPException(
+                    status_code=status.HTTP_400_BAD_REQUEST,
+                    detail=f"Table id {order_update.table_id} not found"
+                )
+            if self.table_repo.is_table_occupied(table.id):
+                raise HTTPException(
+                    status_code=status.HTTP_400_BAD_REQUEST,
+                    detail=f"Table {table.id} already has an active order."
+                )
+        updated_order = self.order_repo.update(order_id, order_update)
+        return OrderResponse.model_validate(updated_order)
 
     def complete_order(self, order_id: int) -> OrderResponse:
         order = self.order_repo.get_by_id(order_id)

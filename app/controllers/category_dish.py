@@ -2,7 +2,7 @@ from fastapi import APIRouter
 from typing import List
 from pydantic import PositiveInt
 
-from app.core.category_dish import CategoryCoreDep  # твоя залежність сервісу категорій
+from app.core.category_dish import CategoryCoreDep  # залежність сервісу категорій
 from app.schemas.category_dish import CategoryCreate, CategoryUpdate, CategoryResponse
 
 router = APIRouter(
